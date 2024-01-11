@@ -17,8 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .routes import users
+from .routes import access
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('users/', users.users_list)
+    path('users/', users.users_list),
+    path('access/', access.scraped_feed)
 ]
