@@ -9,7 +9,7 @@ charset-normalizer==3.3.2
 colorama==0.4.6
 cssselect==1.2.0
 dj-database-url==2.1.0
-Django==5.0.1
+Django==4.2.9
 djangorestframework==3.14.0
 fake-useragent==1.4.0
 gunicorn==21.2.0
