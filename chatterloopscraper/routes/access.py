@@ -13,7 +13,7 @@ def scraped_feed(request):
     script_directory = os.path.dirname(os.path.realpath(__file__))
     parent_directory = os.path.dirname(script_directory)
     driver_folder = 'driver'
-    webdriver_filename = 'chromedriver.exe'
+    webdriver_filename = 'chromedriver.exe' if os.environ.get("ENVIRONMENT") == "Windows" else 'chromedriverlinux'
 
     webdriver_path = os.path.join(parent_directory, driver_folder, webdriver_filename)
     chrome_options = Options()
