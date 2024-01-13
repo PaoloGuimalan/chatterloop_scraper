@@ -4,6 +4,7 @@ from requests_html import HTMLSession
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.service import Service
 import os
 import time
 import requests
@@ -18,8 +19,9 @@ def scraped_feed(request):
     webdriver_path = os.path.join(parent_directory, driver_folder, webdriver_filename)
     chrome_options = Options()
     chrome_options.add_argument('--headless')
-    chrome_options.add_argument(f"webdriver.chrome.driver={webdriver_path}")
-    browser = webdriver.Chrome(options=chrome_options)
+    # chrome_options.add_argument(f"webdriver.chrome.driver={webdriver_path}")
+    service = Service(webdriver_path)
+    browser = webdriver.Chrome(service=service, options=chrome_options)
 
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
     url = 'https://www.reddit.com/search/?q=programming'
