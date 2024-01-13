@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+_3r+gsx9@etb(ui^o)u=3k*lxul1xulu2d@x9qv4gvu7#hgz*'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = []
+#Default []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -83,13 +85,8 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.parse("postgres://chatterloop_scraper_db_user:NOPAkc2GWT1xCb20TiDdqg2RCfMkscWD@dpg-cmh2fp6n7f5s739o86v0-a.oregon-postgres.render.com/chatterloop_scraper_db")
-
-#EXTERNAL
-#postgres://chatterloop_scraper_db_user:NOPAkc2GWT1xCb20TiDdqg2RCfMkscWD@dpg-cmh2fp6n7f5s739o86v0-a.oregon-postgres.render.com/chatterloop_scraper_db
-
-#INTERNAL
-#postgres://chatterloop_scraper_db_user:NOPAkc2GWT1xCb20TiDdqg2RCfMkscWD@dpg-cmh2fp6n7f5s739o86v0-a/chatterloop_scraper_db
+database_url = os.environ.get("DATABASE_URL")
+DATABASES['default'] = dj_database_url.parse(database_url)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
